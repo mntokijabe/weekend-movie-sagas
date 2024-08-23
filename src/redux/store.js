@@ -61,16 +61,17 @@ const genres = (state = [], action) => {
 
 const movieData = (state = [], action) => {
   if (action.type === 'MOVIE_DATA') {
-    let movieInfo = action.payload.data[0];
-    console.log('movieInfo is', movieInfo.name)
+    let movieInfo = action.payload.data;
+    console.log('movieInfo is', movieInfo[0].name)
     let movieGenres = []
     for (let i=0; i < movieInfo.length; i ++){
-      movieGenres.push(movieInfo.name)
+      movieGenres.push(movieInfo[i].name)
     }
+    console.log('genres are ',movieGenres)
     const returnMovieData = [{
-      title: movieInfo.title,
-      poster: movieInfo.poster,
-      description: movieInfo.description,
+      title: movieInfo[0].title,
+      poster: movieInfo[0].poster,
+      description: movieInfo[0].description,
       genres: movieGenres
         }];
     return returnMovieData
