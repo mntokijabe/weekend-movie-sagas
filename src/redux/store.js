@@ -25,8 +25,8 @@ function* fetchAllMovies() {
 }
 function* getMovie(action) {
   try{
-    console.log('action.payload is: ',action.payload)
     const movieChoice = yield axios.get(`/api/search/${action.payload}`);
+    console.log('movieChoice is :',movieChoice)
     yield put({
       type:'MOVIE_DATA',
       payload: movieChoice
@@ -59,11 +59,31 @@ const genres = (state = [], action) => {
   }
 }
 
+const movieData = (state = [], action) => {
+  if (action.type === 'MOVIE_DATA') {
+    let movieInfo = action.payload.data[0];
+    console.log('movieInfo is', movieInfo.name)
+    let movieGenres = []
+    for (let i=0; i < movieInfo.length; i ++){
+      movieGenres.push(movieInfo.name)
+    }
+    const returnMovieData = [{
+      title: movieInfo.title,
+      poster: movieInfo.poster,
+      description: movieInfo.description,
+      genres: movieGenres
+        }];
+    return returnMovieData
+  }
+  return state
+}
+
 // Create one store that all components can use
 const storeInstance = createStore(
   combineReducers({
     movies,
     genres,
+    movieData
   }),
   // Add sagaMiddleware to our store
   applyMiddleware(sagaMiddleware, logger),
