@@ -2,11 +2,19 @@ import { Route, HashRouter as Router } from 'react-router-dom';
 import MovieList from '../MovieList/MovieList';
 import Details from '../Details/Details';
 import './App.css';
+import { Box } from '@mui/system';
+import { Typography,TextareaAutosize } from '@mui/material';
 
 function App() {
   return (
     <div className="App">
-      <h1>The Movies Saga!</h1>
+      <Box 
+        bgcolor="black" 
+        height="fit-content"
+        // sx={{height:"80px" }}
+        >
+        <Typography color='red' fontSize='4em' fontFamily='times'>The Movies Saga!</Typography>
+        </Box>
       <Router>        
         <Route path="/" exact>
           <MovieList />

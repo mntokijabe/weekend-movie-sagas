@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './MovieList.css';
-import { useHistory
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { Card, Box, Typography, Button, Grid } from "@mui/material";
 
- } from 'react-router-dom/cjs/react-router-dom.min';
+
 function MovieList() {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -23,18 +24,37 @@ function MovieList() {
 
   return (
     <main>
-      <h1>MovieList</h1>
-      <section className="movies">
+      <Typography color='blue' fontSize='3em' fontFamily='times'>
+           MovieList
+      </Typography>
+           
+      <Grid container
+        display='flex'
+        flexDirection='row'
+        spacing={2}
+        justifyContent="center"
+      >
+        
+
+      {/* <section className="movies"> */}
+        {/* <Box> */}
         {movies.map(movie => {
           return (
-            <div data-testid='movieItem' key={movie.id}>
+            <Grid item>
+            <Card 
+            data-testid='movieItem' 
+            key={movie.id}
+            mx = {2}>
               <h3>{movie.title}</h3>
               <img data-testid="toDetails" src={movie.poster} alt={movie.title} 
                 onClick={(e) => handleMovie(movie.id)}/>
-            </div>
+            </Card>
+            </Grid>
           );
         })}
-      </section>
+        {/* </Box> */}
+      {/* </section> */}
+      </Grid>
     </main>
   );
 }
