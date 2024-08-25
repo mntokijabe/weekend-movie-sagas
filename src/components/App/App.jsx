@@ -11,6 +11,7 @@ function App() {
       <Box 
         bgcolor="black" 
         height="fit-content"
+        width='auto'
         // sx={{height:"80px" }}
         >
         <Typography color='red' fontSize='4em' fontFamily='times'>The Movies Saga!</Typography>
