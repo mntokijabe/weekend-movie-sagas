@@ -51,8 +51,7 @@ function MovieList() {
             </Grid>
           );
         })}
-        {/* </Box> */}
-      {/* </section> */}
+
       </Grid>
     </main>
   );

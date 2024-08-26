@@ -51,8 +51,9 @@ const addNewMovie = (event) => {
                 </Select>
 
                 <Button type='submit'>Add New Movie</Button>
+
             </form>
-        </div>
+            <Button sx={{margin:2, backgroundColor:'red'}} variant="contained"   onClick={() => {history.push('/')}}>Cancel</Button>        </div>
     );
 }
 
