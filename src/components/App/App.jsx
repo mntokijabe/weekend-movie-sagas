@@ -1,6 +1,7 @@
 import { Route, HashRouter as Router } from 'react-router-dom';
 import MovieList from '../MovieList/MovieList';
 import Details from '../Details/Details';
+import AddMovie from '../AddMovie/AddMovie';
 import './App.css';
 import { Box } from '@mui/system';
 import { Typography,TextareaAutosize } from '@mui/material';
@@ -23,7 +24,9 @@ function App() {
         <Route exact path="/details">
         <Details />
         </Route>
-        {/* Details page */}
+        <Route exact path="/addmovie">
+        <AddMovie />
+        </Route>
 
         {/* Add Movie page */}
         

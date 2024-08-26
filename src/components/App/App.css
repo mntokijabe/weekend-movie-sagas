@@ -4,3 +4,6 @@
 body {
   background-color: rgb(247, 230, 221);
 }
+input {
+  margin:5px;
+}
