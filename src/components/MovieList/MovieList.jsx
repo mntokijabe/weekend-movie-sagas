@@ -27,6 +27,8 @@ function MovieList() {
       <Typography color='blue' fontSize='3em' fontFamily='times'>
            MovieList
       </Typography>
+      <Button sx={{margin:2}} variant="contained"   onClick={() => {history.push('/addmovie')}}>Add New Movie</Button>
+
            
       <Grid container
         display='flex'
@@ -35,9 +37,6 @@ function MovieList() {
         justifyContent="center"
       >
         
-
-      {/* <section className="movies"> */}
-        {/* <Box> */}
         {movies.map(movie => {
           return (
             <Grid item>

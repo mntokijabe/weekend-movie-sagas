@@ -8,6 +8,8 @@ import axios from 'axios';
 function* rootSaga() {
   yield takeEvery('FETCH_MOVIES', fetchAllMovies);
   yield takeLatest('GET_MOVIE', getMovie)
+  yield takeLatest('GET_GENRES', getGenres)
+  yield takeLatest('ADD_MOVIE', addMovie)
 }
 
 function* fetchAllMovies() {
@@ -35,6 +37,30 @@ function* getMovie(action) {
     console.log('error getting movie data', error)
   }
 }
+function* getGenres() {
+  try {
+    const allGenres = yield axios.get('/api/genres');
+    console.log('the genres are',allGenres)
+    yield put({
+      type: 'SET_GENRES',
+      payload: allGenres.data
+    });
+  } catch (error) {
+    console.log('get genres error:', error);
+  }
+}
+
+function* addMovie(action) {
+  console.log('new movie is', action.payload)
+  try {
+    yield axios.post('/api/movies', action.payload)
+    yield put({type: 'FETCH_MOVIES'})
+  }catch(error){
+    console.log('error adding a new movie',error)
+  }
+}
+
+
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
@@ -50,7 +76,7 @@ const movies = (state = [], action) => {
 }
 
 // Used to store the movie genres
-const genres = (state = [], action) => {
+const genres = (state = [''], action) => {
   switch (action.type) {
     case 'SET_GENRES':
       return action.payload;
@@ -59,7 +85,10 @@ const genres = (state = [], action) => {
   }
 }
 
-const movieData = (state = [], action) => {
+// Used to store the individual movie data, including
+// putting the genres into their own array and then
+// storing all the data in one array
+const movieData = (state = [''], action) => {
   if (action.type === 'MOVIE_DATA') {
     let movieInfo = action.payload.data;
     console.log('movieInfo is', movieInfo[0].name)
